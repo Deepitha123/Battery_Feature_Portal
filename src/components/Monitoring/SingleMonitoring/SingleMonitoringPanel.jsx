@@ -10,15 +10,16 @@ const SingleMonitoringPanel = () => {
         ],
         health: [
             { name: 'State of Health (SOH)', value: '', status: 'good' },
-            { name: 'Capacity Fade', value: '', status: 'normal' }
+            { name: 'Capacity Fade', value: '', status: 'normal' },
+            { name: 'Degradation Rate', value: '', status: 'normal' }
         ],
         thermal: [
             { name: 'Temperature Trend', value: '', status: 'normal' },
             { name: 'Thermal Stability Map', value: '', status: 'normal' }
         ],
         life: [
-            { name: 'Remaining Cycle Life', value: '', status: 'normal' },
-            { name: 'End-of-Life Forecast', value: '', status: 'normal' }
+            { name: 'Cycle Life Summary', value: '', status: 'normal' },
+            { name: 'Remaining Useful Life (RUL)', value: '', status: 'normal' }
         ]
     }
 

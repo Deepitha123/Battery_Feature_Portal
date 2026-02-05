@@ -35,7 +35,7 @@ const SingleMonitoringPanel = () => {
                         <path d="M3 8H17M8 3V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                 </div>
-                <h2>SINGLE MONITORING</h2>
+                <h2>Li-ion Battery</h2>
             </div>
 
             <div className="monitoring-sections">
@@ -63,7 +63,7 @@ const SingleMonitoringPanel = () => {
                         {monitoringData.health.map((item, index) => (
                             <button
                                 key={index}
-                                className={`monitoring-item ${selectedAnalysis === item.name ? 'active' : ''} ${item.name === 'State of Health (SOH)' ? 'highlighted' : ''}`}
+                                className={`monitoring-item ${selectedAnalysis === item.name ? 'active' : ''}`}
                                 onClick={() => setSelectedAnalysis(item.name)}
                             >
                                 <span className="item-name">{item.name}</span>

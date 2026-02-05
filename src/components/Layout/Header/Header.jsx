@@ -68,7 +68,7 @@ const Header = () => {
                                 className={`nav-tab ${isActiveTab('/core-technology') ? 'active' : ''}`}
                                 onClick={() => handleTabClick('/core-technology')}
                             >
-                                Single Battery
+                                Li-ion Battery
                             </button>
                             <button
                                 className={`nav-tab ${isActiveTab('/hybrid-battery') ? 'active' : ''}`}

@@ -2,7 +2,27 @@ from fastapi import APIRouter, HTTPException, Query
 from app.services import electrical, health
 from app.schemas import response
 
+from app.core.config import settings
+import os
+
 router = APIRouter()
+
+@router.get("/list")
+def list_batteries():
+    """
+    List all available .pkl battery files with natural numeric sorting.
+    """
+    try:
+        import re
+        files = [f for f in os.listdir(settings.DATA_DIR) if f.endswith(".pkl")]
+        
+        # Natural sorting: Battery_2 comes before Battery_10
+        def natural_key(text):
+            return [int(c) if c.isdigit() else c.lower() for c in re.split('([0-9]+)', text)]
+            
+        return sorted(files, key=natural_key)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/voltage", response_model=response.VoltageResponse)
 def get_voltage_profile(

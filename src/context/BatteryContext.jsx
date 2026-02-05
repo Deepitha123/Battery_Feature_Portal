@@ -22,6 +22,23 @@ export const BatteryProvider = ({ children }) => {
     const [analysisResult, setAnalysisResult] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
+    const [batteryList, setBatteryList] = useState([])
+
+    // Fetch battery list on mount
+    React.useEffect(() => {
+        const fetchList = async () => {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/v1/battery/list')
+                if (response.ok) {
+                    const data = await response.json()
+                    setBatteryList(data)
+                }
+            } catch (err) {
+                console.error('Failed to fetch battery list:', err)
+            }
+        }
+        fetchList()
+    }, [])
 
     const fetchAnalysisData = useCallback(async (analysisType, filename, cycleIdx) => {
         setIsLoading(true)
@@ -71,7 +88,8 @@ export const BatteryProvider = ({ children }) => {
         analysisResult,
         fetchAnalysisData,
         isLoading,
-        error
+        error,
+        batteryList
     }
 
     return (

@@ -1,25 +1,28 @@
 import React from 'react'
 import './SingleMonitoringPanel.css'
+import { useBattery } from '../../../context/BatteryContext'
 
 const SingleMonitoringPanel = () => {
+    const { selectedAnalysis, setSelectedAnalysis } = useBattery()
+
     const monitoringData = {
         electrical: [
-            { name: 'Voltage Profile', value: 'V', status: 'active' },
-            { name: 'Current Profile', value: 'I', status: 'normal' },
-            { name: 'Internal Resistance', value: 'R', status: 'normal' }
+            { name: 'Voltage Profile', value: 'V' },
+            { name: 'Current Profile', value: 'I' },
+            { name: 'Internal Resistance', value: 'R' }
         ],
         health: [
-            { name: 'State of Health (SOH)', value: '', status: 'good' },
-            { name: 'Capacity Fade', value: '', status: 'normal' },
-            { name: 'Degradation Rate', value: '', status: 'normal' }
+            { name: 'State of Health (SOH)', value: '' },
+            { name: 'Capacity Fade', value: '' },
+            { name: 'Degradation Rate', value: '' }
         ],
         thermal: [
-            { name: 'Temperature Trend', value: '', status: 'normal' },
-            { name: 'Thermal Stability Map', value: '', status: 'normal' }
+            { name: 'Temperature Trend', value: '' },
+            { name: 'Thermal Stability Map', value: '' }
         ],
         life: [
-            { name: 'Cycle Life Summary', value: '', status: 'normal' },
-            { name: 'Remaining Useful Life (RUL)', value: '', status: 'normal' }
+            { name: 'Cycle Life Summary', value: '' },
+            { name: 'Remaining Useful Life (RUL)', value: '' }
         ]
     }
 
@@ -29,7 +32,7 @@ const SingleMonitoringPanel = () => {
                 <div className="header-icon">
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" strokeWidth="2" />
-                        <path d="M3 8H17M8 3V17" stroke="currentColor" strokeWidth="2" />
+                        <path d="M3 8H17M8 3V17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
                     </svg>
                 </div>
                 <h2>SINGLE MONITORING</h2>
@@ -41,7 +44,11 @@ const SingleMonitoringPanel = () => {
                     <h3 className="section-title">ELECTRICAL MONITORING</h3>
                     <div className="monitoring-items">
                         {monitoringData.electrical.map((item, index) => (
-                            <button key={index} className="monitoring-item">
+                            <button
+                                key={index}
+                                className={`monitoring-item ${selectedAnalysis === item.name ? 'active' : ''}`}
+                                onClick={() => setSelectedAnalysis(item.name)}
+                            >
                                 <span className="item-name">{item.name}</span>
                                 {item.value && <span className="item-value">{item.value}</span>}
                             </button>
@@ -56,7 +63,8 @@ const SingleMonitoringPanel = () => {
                         {monitoringData.health.map((item, index) => (
                             <button
                                 key={index}
-                                className={`monitoring-item ${item.name === 'State of Health (SOH)' ? 'highlighted' : ''}`}
+                                className={`monitoring-item ${selectedAnalysis === item.name ? 'active' : ''} ${item.name === 'State of Health (SOH)' ? 'highlighted' : ''}`}
+                                onClick={() => setSelectedAnalysis(item.name)}
                             >
                                 <span className="item-name">{item.name}</span>
                             </button>
@@ -69,7 +77,11 @@ const SingleMonitoringPanel = () => {
                     <h3 className="section-title">THERMAL BEHAVIOR</h3>
                     <div className="monitoring-items">
                         {monitoringData.thermal.map((item, index) => (
-                            <button key={index} className="monitoring-item">
+                            <button
+                                key={index}
+                                className={`monitoring-item ${selectedAnalysis === item.name ? 'active' : ''}`}
+                                onClick={() => setSelectedAnalysis(item.name)}
+                            >
                                 <span className="item-name">{item.name}</span>
                             </button>
                         ))}
@@ -81,7 +93,11 @@ const SingleMonitoringPanel = () => {
                     <h3 className="section-title">LIFE PREDICTION</h3>
                     <div className="monitoring-items">
                         {monitoringData.life.map((item, index) => (
-                            <button key={index} className="monitoring-item">
+                            <button
+                                key={index}
+                                className={`monitoring-item ${selectedAnalysis === item.name ? 'active' : ''}`}
+                                onClick={() => setSelectedAnalysis(item.name)}
+                            >
                                 <span className="item-name">{item.name}</span>
                             </button>
                         ))}

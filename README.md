@@ -1,89 +1,65 @@
-# Feature Portal - Battery Brain
+# 🔋 Battery Feature Portal
 
-A modern, high-performance dashboard for battery monitoring, analytics, and feature visualization. This application serves as a portal for managing Single and Hybrid battery systems with advanced telemetry and predictive logic.
+A high-fidelity monitoring and analytics dashboard for battery health, built with **React (Vite)** and **FastAPI**. This portal provides deep engineering insights into battery performance across its entire lifecycle.
 
 ## 🚀 Key Features
 
-### 🔋 Battery Intelligence
-- **Single Battery Monitoring**: Detailed telemetry for Voltage, Current, Resistance, SOH, and Thermal behavior.
-- **Hybrid Battery Analytics**: Specialized monitoring for optimal power split, degradation tracking, and efficiency optimization.
-- **Feature Visualization**: Real-time, interactive charts displaying high-fidelity electrochemical profiles.
+### 1. Electrical Monitoring
+*   **Voltage Profile**: Real-time telemetry visualization with automated limit violation detection (V_MAX/V_MIN).
+*   **Current & C-Rate**: Dynamic current tracking and automatic C-Rate calculation based on nominal capacity.
+*   **Internal Resistance (DCIR)**: Advanced trend analysis using a robust DCIR fallback algorithm (ΔV/ΔI) to track aging even when raw IR data is missing.
 
-### 🎛️ Dynamic Interface
-- **Context-Aware Navigation**: Sidebar features dynamically update the main dashboard content.
-- **Smart Header**: Selector inputs (Chemistry, Battery ID, Pack ID) automatically adapt based on the active view.
-- **Live Simulation**: "Battery Pack Brain" feature includes simulated real-time telemetry data.
-
-### 🎨 Modern UX/UI
-- **Responsive Design**: Adapts seamlessly to different screen sizes.
-- **Theme Support**: Built-in Light/Dark mode with persistent preference.
-- **Interactive Visuals**: Smooth transitions, gradients, and professional SVG iconography.
-
-## 📁 Project Structure
-
-```
-Feature_Portal/
-├── src/
-│   ├── components/
-│   │   ├── Layout/          # Main layout components (Header, Sidebar)
-│   │   ├── Monitoring/      # Monitoring panels (Single & Hybrid)
-│   │   └── Visualization/   # Feature visualization charts
-│   ├── context/             # React Contexts (Battery, Theme, Navigation)
-│   ├── pages/               # Page components
-│   │   ├── CoreTechnology/  # Main dashboard view
-│   │   ├── HybridBattery/   # Hybrid battery view
-│   │   └── ...              # Placeholder pages for other features
-│   ├── App.jsx              # Main app entry & routing
-│   └── index.css            # Global styles & variables
-├── public/                  # Static assets
-└── package.json            # Dependencies & scripts
-```
+### 2. Health & Aging
+*   **State of Health (SOH)**: Industry-standard health scoring based on discharge capacity normalization.
+*   **EOL Prediction**: Automatic detection of End-of-Life (80%) thresholds with explicit cycle marking.
+*   **Health Status Classification**: Real-time binning into *Healthy*, *Warning*, and *Critical* states based on degradation trends.
 
 ## 🛠️ Tech Stack
 
-- **React 18**: Component-based UI architecture.
-- **Vite**: Ultra-fast build tool and development server.
-- **React Router 6**: Client-side routing for seamless navigation.
-- **Recharts**: Composable charting library for data visualization.
-- **Context API**: Global state management for Navigation, Battery Data, and Theme.
-- **CSS3**: Modern styling with CSS Custom Properties (Variables) and Flexbox/Grid.
+*   **Frontend**: React, Vite, Recharts (Data Visualization), CSS3 (Modern Glassmorphism Design).
+*   **Backend**: FastAPI (Python), NumPy (Data Processing), Pickle (Data Interchange).
+*   **Data Source**: High-frequency `.pkl` battery telemetry files.
 
-## 📦 Getting Started
+## ⚙️ Setup & Installation
 
-1.  **Clone the repository**
-    ```bash
-    git clone <repository-url>
-    cd Feature_Portal
-    ```
+### Backend Setup (FastAPI)
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   .\venv\Scripts\activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install fastapi uvicorn numpy pandas
+   ```
+4. Start the server:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
 
-2.  **Install dependencies**
-    ```bash
-    npm install
-    ```
+### Frontend Setup (React)
+1. Navigate to the root directory:
+   ```bash
+   cd ..
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-3.  **Run the development server**
-    ```bash
-    npm run dev
-    ```
+## 📊 Engineering Methodology
+The portal uses advanced data processing techniques:
+*   **Extrema-Preserving Downsampling**: Ensures peaks and spikes are never lost in visualization while maintaining UI performance.
+*   **Natural Numeric Sorting**: Correctly maps cycle indices across disparate data formats (List vs Dict).
+*   **Medial Filtering**: Used in DCIR calculations to filter out sensor noise and physical outliers.
 
-4.  **Open the app**
-    Navigate to `http://localhost:3000` in your browser.
-
-## 📝 Usage Guide
-
-- **Sidebar**: Navigate between main modules (Product, Operations, Supply Chain). All modules are expandable.
-- **Battery Pack Brain**: The core feature containing the primary dashboard. Click it to view live analytics.
-- **Status Indicators**: Watch the "MONITORING LIVE" badge and status bar for system health.
-- **Theme Toggle**: Switch between Light/Dark mode using the button at the bottom of the sidebar.
-
-## 🤝 Contributing
-
-1.  Fork the repository
-2.  Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the ISC License.
+---
+*Developed for advanced battery lifecycle monitoring and diagnostics.*

@@ -48,7 +48,52 @@
 
 .header-actions {
     display: flex;
+    align-items: center;
     gap: var(--spacing-sm);
+}
+
+.cycle-selector-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+}
+
+.total-cycles-badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-secondary);
+    background-color: rgba(0, 201, 167, 0.1);
+    padding: 1px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cycle-selector {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    background-color: var(--color-bg-gray);
+    padding: 2px 10px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+}
+
+.cycle-selector label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}
+
+.cycle-selector input {
+    width: 60px;
+    background: transparent;
+    border: none;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-primary);
+    padding: 2px;
 }
 
 .action-btn {
@@ -145,6 +190,98 @@
     color: var(--color-warning);
 }
 
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-md);
+}
+
+.metric-card {
+    background-color: white;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: transform 0.2s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.metric-card.warning {
+    border-color: var(--color-error);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+.metric-card.health-healthy {
+    border-left: 4px solid #10B981;
+}
+
+.metric-card.health-warning {
+    border-left: 4px solid #F59E0B;
+}
+
+.metric-card.health-critical {
+    border-left: 4px solid #EF4444;
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+.metric-card.warning .metric-value {
+    color: var(--color-error);
+}
+
+.metric-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+}
+
+.metric-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.chart-error {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-error);
+    background-color: rgba(239, 68, 68, 0.05);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--color-error);
+}
+
+.loading-spinner-small {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-border);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    align-self: center;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.note-section {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(0, 102, 255, 0.05));
+    border-left: 4px solid var(--color-info);
+    margin-top: -var(--spacing-md);
+}
+
 @media (max-width: 768px) {
     .visualization-header {
         flex-direction: column;
@@ -154,5 +291,9 @@
 
     .chart-wrapper {
         height: 300px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
